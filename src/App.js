@@ -2,6 +2,7 @@ import React from 'react';
 import TodoForm from './components/TodoComponents/TodoForm';
 import TodoList from './components/TodoComponents/TodoList';
 import Todo from './components/TodoComponents/Todo';
+import './App.css';
 
 class App extends React.Component {
   constructor() {
@@ -55,7 +56,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
         <h2>Todo List: MVP</h2>
         <TodoForm
           addTodoHandler={this.addTodoHandler}
