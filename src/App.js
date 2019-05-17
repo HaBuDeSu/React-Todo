@@ -16,13 +16,24 @@ class App extends React.Component {
     this.setState({input: event.target.value});
   };
 
-  addStudentHandler = event => {
+  addTodoHandler = event => {
     event.preventDefault();
-    let newTodo = this.state.input;
+    let newTodo = {
+      name: this.state.input,
+      id: this.state.todoItems.length,
+      completed: false
+    };
+    console.log(newTodo.id)
+
     this.setState({
       todoItems: [... this.state.todoItems, newTodo],
       input: ""
     });
+
+  }
+
+  toggleTodo = todoId => {
+    console.log("todoId: ", todoId)
   }
 
   render() {
@@ -30,13 +41,17 @@ class App extends React.Component {
       <div>
         <h2>Todo List: MVP</h2>
         <TodoForm
-          addStudentHandler={this.addStudentHandler}
+          addTodoHandler={this.addTodoHandler}
           changeHandler={this.changeHandler}
           value={this.state.input}
         />
         <TodoList
           todoItems={this.state.todoItems.map(todo => (
-            <Todo name={todo} />
+            <Todo
+              key={todo.id}
+              todo={todo}
+              onClick={this.toggleTodo}
+            />
           ))}
         />
       </div>

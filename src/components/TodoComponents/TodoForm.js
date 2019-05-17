@@ -4,7 +4,7 @@ import './Todo.css';
 function TodoForm(props) {
   return (
     <div>
-      <form className="todo-form">
+      <form className="todo-form" onSubmit={props.addTodoHandler}>
         <input
           type="text"
           value={props.value}
@@ -12,7 +12,7 @@ function TodoForm(props) {
           placeholder="...todo"
           onChange={props.changeHandler}
         />
-        <button className="add-todo" onClick={props.addStudentHandler}>Add Todo</button>
+        <button className="add-todo" onClick={props.addTodoHandler}>Add Todo</button>
         <button className="clear-completed">Clear Completed</button>
       </form>
     </div>
