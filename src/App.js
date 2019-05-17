@@ -23,7 +23,7 @@ class App extends React.Component {
       id: this.state.todoItems.length,
       completed: false
     };
-    console.log(newTodo.id)
+    console.log(newTodo.completed)
 
     this.setState({
       todoItems: [... this.state.todoItems, newTodo],
@@ -34,6 +34,23 @@ class App extends React.Component {
 
   toggleTodo = todoId => {
     console.log("todoId: ", todoId)
+    this.setState({
+      todoItems: this.state.todoItems.map(todo => {
+        if(todoId === todo.id) {
+          return {
+            ...todo,
+            completed: !todo.completed
+          };
+        }
+        return todo;
+      })
+    })
+  }
+
+  clearCompleted = () => {
+    this.setState({
+      todoItems: this.state.todoItems.filter(todo => todo.completed === false)
+    })
   }
 
   render() {
@@ -43,14 +60,14 @@ class App extends React.Component {
         <TodoForm
           addTodoHandler={this.addTodoHandler}
           changeHandler={this.changeHandler}
+          clearCompleted={this.clearCompleted}
           value={this.state.input}
         />
         <TodoList
           todoItems={this.state.todoItems.map(todo => (
             <Todo
-              key={todo.id}
               todo={todo}
-              onClick={this.toggleTodo}
+              toggleTodo={this.toggleTodo}
             />
           ))}
         />
